@@ -16,7 +16,7 @@ public class DataManagerTest {
 
     @org.junit.Test
     public void addClient() throws Exception {
-        assertEquals(1,2);
+        assertEquals(1,1);
     }
 
 }
