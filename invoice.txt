@@ -1,0 +1,12 @@
+Lorincz Arnold, 278, Mera, Cluj,    1
+2013, 1, 50,  0
+Someone, 279, Someplace, Bucuresti,    2
+2012, 1, 31,  0
+Anyone, 280, Anyplace, Iasi,    3
+2013, 1, 32,  0
+Alex Daineanu, 99, Ciocarliei, Cluj,    4
+2018, 3, 199,  0
+client, 1, adresa, cluj,   33
+2018, 11, 36,  0
+andrei, 22, cluj, cluj, 55
+2018, 11, 10,  0

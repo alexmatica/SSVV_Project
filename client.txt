@@ -1,0 +1,7 @@
+Lorincz Arnold, 278, Mera, Cluj,    1
+Someone, 279, Someplace, Bucuresti,    2
+Anyone, 280, Anyplace, Iasi,    3
+Alex Daineanu, 99, Ciocarliei, Cluj,    4
+client, 1, adresa, cluj,   33
+aris, 55, teleorman, cluj,  666
+andrei, 22, cluj, cluj, 55
