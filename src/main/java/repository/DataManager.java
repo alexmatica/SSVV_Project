@@ -4,8 +4,10 @@ import model.Client;
 import model.Invoice;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class DataManager {
     private final static String fileClient = "client.txt";
@@ -14,7 +16,10 @@ public class DataManager {
     public ArrayList<Client> clients;
     public ArrayList<Invoice> invoices;
 
+    private boolean forTesting;
+
     public DataManager(){
+        forTesting = false;
         clients = new ArrayList<>();
         invoices = new ArrayList<>();
 
@@ -22,14 +27,38 @@ public class DataManager {
         LoadInvoices();
     }
 
+    DataManager(boolean createForTest){
+        clients = new ArrayList<>();
+        invoices = new ArrayList<>();
+        if (!createForTest){
+            LoadClients();
+            LoadInvoices();
+        } else{
+            forTesting = true;
+        }
+    }
+
     public void addClient(Client c){
         this.clients.add(c);
-        this.SaveChanges();
+        if (!this.forTesting)
+            this.SaveChanges();
     }
 
     public void addInvoice(Invoice i){
         this.invoices.add(i);
-        this.SaveChanges();
+        if (!this.forTesting)
+            this.SaveChanges();
+    }
+
+    public List<Invoice> getInvoices(Client c){
+        List<Invoice> res = new ArrayList<>();
+
+        for (Invoice invoice : this.invoices) {
+            if (invoice.client.equals(c)) {
+                res.add(invoice);
+            }
+        }
+        return res;
     }
 
     private void LoadClients(){

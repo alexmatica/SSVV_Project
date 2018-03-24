@@ -83,12 +83,8 @@ public class ClientController {
 
     public String ListInvoice(Client c){
         String s = "";
-        for(int i=0; i<_dataManager.invoices.size(); i++){
-            if(_dataManager.invoices.get(i).client.equals(c)){
-                Invoice crt = _dataManager.invoices.get(i);
-                s += String.format("Year: %d, Month: %d, Penalty: %2.0f\n", crt.year, crt.month, crt.toPay);
-            }
-        }
+        for (Invoice crt: this._dataManager.getInvoices(c))
+            s += String.format("Year: %d, Month: %d, Penalty: %2.0f\n", crt.year, crt.month, crt.toPay);
         if (!s.equals(""))
             return s;
         return "No invoices!";
