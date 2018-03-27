@@ -7,14 +7,16 @@ import repository.DataManager;
 public class ClientController {
     private DataManager _dataManager;
 
-    public ClientController(){
-        _dataManager = new DataManager();
+    public ClientController(boolean createForTest){
+        _dataManager = new DataManager(createForTest);
 
         _dataManager.invoices.forEach(System.out::println);
         _dataManager.clients.forEach(System.out::println);
     }
 
-    private String ValidateClient(String name, String address){
+    public String ValidateClient(String name, String address){
+        if (name.length() > 256)
+            return "Name too long";
         if(!name.equals("") && !address.equals("") && !name.equals(" ")){
             for(int i=0;i<name.length();i++){
                 if((!Character.isUpperCase(name.charAt(i))) && (!Character.isLowerCase(name.charAt(i))) && (!Character.isSpaceChar(name.charAt(i)))){

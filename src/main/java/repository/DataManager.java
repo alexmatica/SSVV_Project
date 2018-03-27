@@ -27,7 +27,7 @@ public class DataManager {
         LoadInvoices();
     }
 
-    DataManager(boolean createForTest){
+    public DataManager(boolean createForTest){
         clients = new ArrayList<>();
         invoices = new ArrayList<>();
         if (!createForTest){
