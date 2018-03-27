@@ -66,4 +66,16 @@ public class ClientControllerTest {
         assertEquals("Client already exists!", clientController.AddClient(c.name, c.address, c.idClient));
     }
 
+    @Test
+    public void validateIndexInvalidYear() throws Exception{
+        Client c = new Client("nameok","address", "unique");
+        assertEquals("Year can't be 0 or less!", clientController.AddClientIndex(c,-1,1,1));
+    }
+
+    @Test
+    public void validateIndexInvalidClient() throws Exception{
+        Client c = new Client("","", "");
+        assertEquals("Name or address cannot be empty!", clientController.AddClientIndex(c, 2000, 10, 10));
+    }
+
 }
