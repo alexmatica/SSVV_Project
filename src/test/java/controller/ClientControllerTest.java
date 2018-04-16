@@ -69,7 +69,46 @@ public class ClientControllerTest {
     @Test
     public void validateIndexInvalidYear() throws Exception{
         Client c = new Client("nameok","address", "unique");
-        assertEquals("Year can't be 0 or less!", clientController.AddClientIndex(c,-1,1,1));
+        try {
+            clientController.AddClientIndex(c, -1,1,1);
+            assert false;
+        } catch (NumberFormatException e) {
+            assertEquals("Year can't be 0 or less!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void validateIndexInvalidMonth() throws Exception{
+        Client c = new Client("nameok","address", "unique");
+        try {
+            clientController.AddClientIndex(c, 2018,-1,1);
+            assert false;
+        } catch (NumberFormatException e) {
+            assertEquals("Month must be between 0 and 12!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void validateIndexInvalidToPay() throws Exception{
+        Client c = new Client("nameok","address", "unique");
+        try {
+            clientController.AddClientIndex(c, 2018,1,-11);
+            assert false;
+        } catch (NumberFormatException e) {
+            assertEquals("Amount to pay can't be 0 or less!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void validateIndexValidInvoice() throws Exception{
+        Client c = new Client("nameok","address", "unique");
+        clientController.AddClient("nameok", "address", "unique");
+        try {
+            clientController.AddClientIndex(c, 10,10,10);
+            assert true;
+        } catch (Exception e){
+            assert false;
+        }
     }
 
     @Test
@@ -78,4 +117,23 @@ public class ClientControllerTest {
         assertEquals("Name or address cannot be empty!", clientController.AddClientIndex(c, 2000, 10, 10));
     }
 
+    @Test
+    public void validateIndexExistingInvoice() throws Exception{
+        Client c = new Client("nameok","address", "unique");
+        clientController.AddClient("nameok", "address", "unique");
+        clientController.AddClientIndex(c, 10,10,10);
+        assertEquals("Monthly index already exists!", clientController.AddClientIndex(c, 10,10,10));
+    }
+
+    @Test
+    public void validateIndexValid() throws Exception{
+        try{
+            Client c = new Client("nameok","address", "unique");
+            clientController.AddClient("nameok", "address", "unique");
+            clientController.AddClientIndex(c, 10,10,10);
+            assert true;
+        } catch (Exception e){
+            assert false;
+        }
+    }
 }
